@@ -12,7 +12,7 @@ export default function Layout({ children }) {
 
       <NextSeo title="Store Builder" description="Store Builder" />
 
-      <main>{children}</main>
+      <main style={{ height: '100%' }}>{children}</main>
     </>
   )
 }

@@ -1,13 +1,17 @@
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useRouter } from 'next/router'
 
-import { Grid, GridItem } from '@chakra-ui/react'
-import { Box } from "@chakra-ui/react"
+import { useTranslation } from 'react-i18next'
+import { Center, Heading, Flex, Button, Text, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
+
 
 export default function Home(props) {
-  const { t } = useTranslation('nav')
+  const { t, i18n } = useTranslation('nav')
+
+  const router = useRouter()
+  const { id } = router.query
 
   const [pageHeight, setPageHeight] = useState('')
   const [pageWidth, setPageWidth] = useState('')
@@ -55,7 +59,7 @@ export default function Home(props) {
     const minutesF = minutes <= 9 ? "0" + minutes : minutes;
     const seconds = time.getSeconds();
     const secondsF = seconds <= 9 ? "0" + seconds : seconds;
-    const timeNow = year + '年' + month + '月' + day + "日" + " " + hour + ":" + minutesF + ":" + secondsF;
+    const timeNow = year + '/' + month + '/' + day + " " + hour + ":" + minutesF + ":" + secondsF;
     setDate(timeNow);
   }
 
@@ -112,48 +116,76 @@ export default function Home(props) {
 
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to {t('home')}, 黄启滔</h1>
+    <Flex h="100%" flexDirection="column">
+      <Center minH='200px' paddingTop='10'>
+        <Heading as='h1' size='4xl'>
+          Welcome to {t('home')}, {id}
+        </Heading>
+      </Center>
+      <Flex padding={[5, 20]} flexGrow='1' justifyContent='center' alignItems='center' h='100%' >
+        <Flex p='2' justifyContent='center' alignItems='center' flexDirection="column" h='100%' >
+          <Button m='2' width="100%" colorScheme='gray' size='lg'>
+            Language
+          </Button>
+          <Button m='2' width="100%" colorScheme='gray' size='lg' onClick={() => alert('nothing')}>
+            nothing
+          </Button>
+        </Flex>
+        <Flex flexWrap='wrap' ml='10' flexGrow='1' justifyContent='center' alignItems='center' h='100%' p='2' columns={[2, null, 4]} spacing='40px'
+          border='1px' borderRadius='10px' borderColor='#eaeaea'>
+          <LinkBox href="https://nextjs.org/docs">
+            <Flex alignItems='center' p='2' m='2' minW='340px' height='120px' border='1px' borderRadius='10px' borderColor='#eaeaea'
+              _hover={{ color: '#0070f3', borderColor: '#0070f3' }}>
+              <LinkOverlay href="https://nextjs.org/docs">
+                <Text fontSize='xl'>Status 1 &rarr;</Text>
+                <Text>Page height: {pageHeight}</Text>
+                <Text>Page width: {pageWidth}</Text>
+              </LinkOverlay>
+            </Flex>
+          </LinkBox>
+          <LinkBox href="https://nextjs.org/docs">
+            <Flex alignItems='center' p='2' m='2' minW='340px' height='120px' border='1px' borderRadius='10px' borderColor='#eaeaea'
+              _hover={{ color: '#0070f3', borderColor: '#0070f3' }}>
+              <LinkOverlay href="https://nextjs.org/docs">
+                <Text fontSize='xl'>Status 2 &rarr;</Text>
+                <Text>Mouse position: x:{mousePos.x} y:{mousePos.y}</Text>
+              </LinkOverlay>
+            </Flex>
+          </LinkBox>
+          <LinkBox href="https://nextjs.org/docs">
+            <Flex alignItems='center' p='2' m='2' minW='340px' height='120px' border='1px' borderRadius='10px' borderColor='#eaeaea'
+              _hover={{ color: '#0070f3', borderColor: '#0070f3' }}>
+              <LinkOverlay href="https://nextjs.org/docs">
+                <Text fontSize='xl'>Status 3 &rarr;</Text>
+                <Text>Current date: {date}</Text>
+              </LinkOverlay>
+            </Flex>
+          </LinkBox>
+          <LinkBox >
+            <Flex alignItems='center' p='2' m='2' minW='340px' height='120px' border='1px' borderRadius='10px' borderColor='#eaeaea'
+              _hover={{ color: '#0070f3', borderColor: '#0070f3' }}>
+              <LinkOverlay href="https://nextjs.org/docs">
+                <Text fontSize='xl'>Status 4 &rarr;</Text>
+                <Text>Your IP: {ip}</Text>
+              </LinkOverlay>
+            </Flex>
+          </LinkBox>
+        </Flex>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Status 1 &rarr;</h2>
-            <p>Page height: {pageHeight}</p>
-            <p>Page width: {pageWidth}</p>
-          </a>
-
-
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Status 2 &rarr;</h2>
-            <p>Mouse position: x:{mousePos.x} y:{mousePos.y}</p>
-          </a>
-
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Status 3 &rarr;</h2>
-            <p>Current date: {date}</p>
-          </a>
-
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Status 4 &rarr;</h2>
-            <p>Your IP: {ip}</p>
-          </a>
-        </div>
-      </main >
-
-      <footer className={styles.footer}>
-        <a
+      </Flex>
+      <Center w='100%' minH='80px' borderTop='1px' borderColor='gray.300'>
+        <Link
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
         >
           Powered by{' '}
-          <span className={styles.logo}>
+          <span>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
-        </a>
-      </footer>
-    </div >
+        </Link>
+      </Center>
+    </Flex >
   )
 
 
