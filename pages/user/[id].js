@@ -8,7 +8,7 @@ import { Center, Heading, Flex, Button, Text, Link, LinkBox, LinkOverlay } from 
 
 
 export default function Home(props) {
-  const { t, i18n } = useTranslation('nav')
+  const { t, i18n } = useTranslation('nav');
 
   const router = useRouter()
   const { id } = router.query
@@ -116,19 +116,21 @@ export default function Home(props) {
 
 
   return (
-    <Flex h="100%" flexDirection="column">
+    <Flex h="100%" flexDirection="column" >
       <Center minH='200px' paddingTop='10'>
         <Heading as='h1' size='4xl'>
-          Welcome to {t('home')}, {id}
+          {t('Welcome to home', { nav: 'main' })}, {id}
         </Heading>
       </Center>
-      <Flex padding={[5, 20]} flexGrow='1' justifyContent='center' alignItems='center' h='100%' >
+      <Flex p='10' flexGrow='1' justifyContent='center' alignItems='center' h='100%' >
         <Flex p='2' justifyContent='center' alignItems='center' flexDirection="column" h='100%' >
-          <Button m='2' width="100%" colorScheme='gray' size='lg'>
-            Language
+          <Button m='2' minW='172px' width="100%" colorScheme='gray' size='lg' onClick={
+            () => i18n.changeLanguage(i18n.language === 'en-US' ? 'zh-CN' : 'en-US')
+          }>
+            {t('Language')}
           </Button>
           <Button m='2' width="100%" colorScheme='gray' size='lg' onClick={() => alert('nothing')}>
-            nothing
+            {t('nothing')}
           </Button>
         </Flex>
         <Flex flexWrap='wrap' ml='10' flexGrow='1' justifyContent='center' alignItems='center' h='100%' p='2' columns={[2, null, 4]} spacing='40px'
@@ -137,9 +139,9 @@ export default function Home(props) {
             <Flex alignItems='center' p='2' m='2' minW='340px' height='120px' border='1px' borderRadius='10px' borderColor='#eaeaea'
               _hover={{ color: '#0070f3', borderColor: '#0070f3' }}>
               <LinkOverlay href="https://nextjs.org/docs">
-                <Text fontSize='xl'>Status 1 &rarr;</Text>
-                <Text>Page height: {pageHeight}</Text>
-                <Text>Page width: {pageWidth}</Text>
+                <Text fontSize='xl'> {t('Status')} 1 &rarr;</Text>
+                <Text>  {t('Page height')}: {pageHeight}</Text>
+                <Text>{t('Page width')}: {pageWidth}</Text>
               </LinkOverlay>
             </Flex>
           </LinkBox>
@@ -147,8 +149,8 @@ export default function Home(props) {
             <Flex alignItems='center' p='2' m='2' minW='340px' height='120px' border='1px' borderRadius='10px' borderColor='#eaeaea'
               _hover={{ color: '#0070f3', borderColor: '#0070f3' }}>
               <LinkOverlay href="https://nextjs.org/docs">
-                <Text fontSize='xl'>Status 2 &rarr;</Text>
-                <Text>Mouse position: x:{mousePos.x} y:{mousePos.y}</Text>
+                <Text fontSize='xl'> {t('Status')} 2 &rarr;</Text>
+                <Text> {t('Mouse position')}: x:{mousePos.x} y:{mousePos.y}</Text>
               </LinkOverlay>
             </Flex>
           </LinkBox>
@@ -156,8 +158,8 @@ export default function Home(props) {
             <Flex alignItems='center' p='2' m='2' minW='340px' height='120px' border='1px' borderRadius='10px' borderColor='#eaeaea'
               _hover={{ color: '#0070f3', borderColor: '#0070f3' }}>
               <LinkOverlay href="https://nextjs.org/docs">
-                <Text fontSize='xl'>Status 3 &rarr;</Text>
-                <Text>Current date: {date}</Text>
+                <Text fontSize='xl'> {t('Status')} 3 &rarr;</Text>
+                <Text> {t('Current date')}: {date}</Text>
               </LinkOverlay>
             </Flex>
           </LinkBox>
@@ -165,8 +167,8 @@ export default function Home(props) {
             <Flex alignItems='center' p='2' m='2' minW='340px' height='120px' border='1px' borderRadius='10px' borderColor='#eaeaea'
               _hover={{ color: '#0070f3', borderColor: '#0070f3' }}>
               <LinkOverlay href="https://nextjs.org/docs">
-                <Text fontSize='xl'>Status 4 &rarr;</Text>
-                <Text>Your IP: {ip}</Text>
+                <Text fontSize='xl'> {t('Status')} 4 &rarr;</Text>
+                <Text> {t('Your IP')}: {ip}</Text>
               </LinkOverlay>
             </Flex>
           </LinkBox>
