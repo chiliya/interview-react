@@ -10,7 +10,10 @@ export default function Layout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <NextSeo title="xblog" description="this is xx's blog" />
+      <NextSeo title="xblog"
+        description="this is xx's blog"
+        canonical="https://www.xxblog.com/"
+      />
 
       <main style={{ height: '100%' }}>{children}</main>
     </>
