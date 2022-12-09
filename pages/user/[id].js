@@ -5,9 +5,11 @@ import { useRouter } from 'next/router'
 
 import { useTranslation } from 'react-i18next'
 import { Center, Heading, Flex, Button, Text, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
+import { useColorMode } from '@chakra-ui/react'
 
 
-export default function Home(props) {
+
+export default function Home() {
   const { t, i18n } = useTranslation('nav');
 
   const router = useRouter()
@@ -22,6 +24,7 @@ export default function Home(props) {
   const [date, setDate] = useState('0000年00月0日 00:00:00');
   const [ip, setIp] = useState('');
 
+  const { colorMode, toggleColorMode } = useColorMode()
 
   useEffect(() => {
     getIPs(function (ip) { setIp(ip); });
@@ -129,8 +132,8 @@ export default function Home(props) {
           }>
             {t('Language')}
           </Button>
-          <Button m='2' width="100%" colorScheme='gray' size='lg' onClick={() => alert('nothing')}>
-            {t('nothing')}
+          <Button m='2' width="100%" colorScheme='gray' size='lg' onClick={toggleColorMode}>
+            {t(colorMode === 'light' ? 'Dark' : 'Light')}
           </Button>
         </Flex>
         <Flex flexWrap='wrap' ml='10' flexGrow='1' justifyContent='center' alignItems='center' h='100%' p='2' columns={[2, null, 4]} spacing='40px'
@@ -176,16 +179,14 @@ export default function Home(props) {
 
       </Flex>
       <Center w='100%' minH='80px' borderTop='1px' borderColor='gray.300'>
-        <Link
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </Link>
+        <LinkBox        >
+          <LinkOverlay rel="noopener noreferrer" isExternal href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app">
+            Powered by{' '}
+            <span>
+              <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            </span>
+          </LinkOverlay>
+        </LinkBox>
       </Center>
     </Flex >
   )

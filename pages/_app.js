@@ -6,6 +6,8 @@ import Layout from '../components/Layout.js'
 import '../styles/globals.css'
 import '../i18n'
 
+import { ColorModeScript } from '@chakra-ui/react'
+
 export default function MyApp({ Component, pageProps }) {
   const myTheme = extendTheme(
     {
@@ -20,6 +22,7 @@ export default function MyApp({ Component, pageProps }) {
     <RecoilRoot>
       <ChakraProvider theme={myTheme}>
         <Layout>
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Component {...pageProps} />
         </Layout>
       </ChakraProvider>
