@@ -15,6 +15,7 @@ export default function Home() {
   const router = useRouter()
   const { id } = router.query
 
+  //status state
   const [pageHeight, setPageHeight] = useState('')
   const [pageWidth, setPageWidth] = useState('')
   const [mousePos, setMousePos] = useState({
@@ -24,6 +25,7 @@ export default function Home() {
   const [date, setDate] = useState('0000年00月0日 00:00:00');
   const [ip, setIp] = useState('');
 
+  //color mode
   const { colorMode, toggleColorMode } = useColorMode()
 
   useEffect(() => {
@@ -33,7 +35,6 @@ export default function Home() {
     window.addEventListener('resize', getPageSize)
     window.addEventListener('mousemove', mouseHandler)
     return () => {
-      console.log('destroy');
       clearInterval(timer);
       window.removeEventListener('resize', getPageSize)
       window.removeEventListener('mousemove', mouseHandler)
@@ -120,12 +121,15 @@ export default function Home() {
 
   return (
     <Flex h="100%" flexDirection="column" >
+      {/* top */}
       <Center minH='200px' paddingTop='10'>
         <Heading as='h1' size='4xl'>
           {t('Welcome to home', { nav: 'main' })}, {id}
         </Heading>
       </Center>
+      {/* contain */}
       <Flex p='10' flexGrow='1' justifyContent='center' alignItems='center' h='100%' >
+        {/* menu */}
         <Flex p='2' justifyContent='center' alignItems='center' flexDirection="column" h='100%' >
           <Button m='2' minW='172px' width="100%" colorScheme='gray' size='lg' onClick={
             () => i18n.changeLanguage(i18n.language === 'en-US' ? 'zh-CN' : 'en-US')
@@ -136,6 +140,7 @@ export default function Home() {
             {t(colorMode === 'light' ? 'Dark' : 'Light')}
           </Button>
         </Flex>
+        {/* status */}
         <Flex flexWrap='wrap' ml='10' flexGrow='1' justifyContent='center' alignItems='center' h='100%' p='2' columns={[2, null, 4]} spacing='40px'
           border='1px' borderRadius='10px' borderColor='#eaeaea'>
           <LinkBox href="https://nextjs.org/docs">
@@ -178,6 +183,7 @@ export default function Home() {
         </Flex>
 
       </Flex>
+      {/* footer */}
       <Center w='100%' minH='80px' borderTop='1px' borderColor='gray.300'>
         <LinkBox        >
           <LinkOverlay rel="noopener noreferrer" isExternal href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app">
